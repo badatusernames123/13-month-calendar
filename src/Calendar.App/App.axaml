@@ -1,0 +1,92 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Calendar.App.App"
+             RequestedThemeVariant="Dark">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="AppWindowBackgroundColor">#020617</Color>
+                    <Color x:Key="AppCardBackgroundColor">#08111F</Color>
+                    <Color x:Key="AppCardBorderColor">#1B3657</Color>
+                    <Color x:Key="AppMutedTextColor">#8AA4C2</Color>
+                    <Color x:Key="AppHeroBackgroundColor">#030A14</Color>
+                    <Color x:Key="AppHeroBorderColor">#15406B</Color>
+                    <Color x:Key="AppSpecialPanelBackgroundColor">#0B1830</Color>
+                    <Color x:Key="AppSpecialPanelBorderColor">#22D3EE</Color>
+                    <Color x:Key="AppAccentColor">#22D3EE</Color>
+                    <Color x:Key="AppSecondaryAccentColor">#F472B6</Color>
+                    <Color x:Key="AppGlowColor">#0EA5E9</Color>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="AppWindowBackgroundColor">#020617</Color>
+                    <Color x:Key="AppCardBackgroundColor">#08111F</Color>
+                    <Color x:Key="AppCardBorderColor">#1B3657</Color>
+                    <Color x:Key="AppMutedTextColor">#8AA4C2</Color>
+                    <Color x:Key="AppHeroBackgroundColor">#030A14</Color>
+                    <Color x:Key="AppHeroBorderColor">#15406B</Color>
+                    <Color x:Key="AppSpecialPanelBackgroundColor">#0B1830</Color>
+                    <Color x:Key="AppSpecialPanelBorderColor">#22D3EE</Color>
+                    <Color x:Key="AppAccentColor">#22D3EE</Color>
+                    <Color x:Key="AppSecondaryAccentColor">#F472B6</Color>
+                    <Color x:Key="AppGlowColor">#0EA5E9</Color>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <Color x:Key="AppWindowBackgroundColor">#020617</Color>
+                    <Color x:Key="AppCardBackgroundColor">#08111F</Color>
+                    <Color x:Key="AppCardBorderColor">#1B3657</Color>
+                    <Color x:Key="AppMutedTextColor">#8AA4C2</Color>
+                    <Color x:Key="AppHeroBackgroundColor">#030A14</Color>
+                    <Color x:Key="AppHeroBorderColor">#15406B</Color>
+                    <Color x:Key="AppSpecialPanelBackgroundColor">#0B1830</Color>
+                    <Color x:Key="AppSpecialPanelBorderColor">#22D3EE</Color>
+                    <Color x:Key="AppAccentColor">#22D3EE</Color>
+                    <Color x:Key="AppSecondaryAccentColor">#F472B6</Color>
+                    <Color x:Key="AppGlowColor">#0EA5E9</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <SolidColorBrush x:Key="AppWindowBackgroundBrush" Color="{DynamicResource AppWindowBackgroundColor}" />
+            <SolidColorBrush x:Key="AppCardBackgroundBrush" Color="{DynamicResource AppCardBackgroundColor}" />
+            <SolidColorBrush x:Key="AppCardBorderBrush" Color="{DynamicResource AppCardBorderColor}" />
+            <SolidColorBrush x:Key="AppMutedTextBrush" Color="{DynamicResource AppMutedTextColor}" />
+            <SolidColorBrush x:Key="AppHeroBackgroundBrush" Color="{DynamicResource AppHeroBackgroundColor}" />
+            <SolidColorBrush x:Key="AppHeroBorderBrush" Color="{DynamicResource AppHeroBorderColor}" />
+            <SolidColorBrush x:Key="AppSpecialPanelBackgroundBrush" Color="{DynamicResource AppSpecialPanelBackgroundColor}" />
+            <SolidColorBrush x:Key="AppSpecialPanelBorderBrush" Color="{DynamicResource AppSpecialPanelBorderColor}" />
+            <SolidColorBrush x:Key="AppAccentBrush" Color="{DynamicResource AppAccentColor}" />
+            <SolidColorBrush x:Key="AppSecondaryAccentBrush" Color="{DynamicResource AppSecondaryAccentColor}" />
+            <SolidColorBrush x:Key="AppGlowBrush" Color="{DynamicResource AppGlowColor}" />
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+        <Style Selector="Border.card">
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="Background" Value="{DynamicResource AppCardBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AppCardBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="TextBlock.section-title">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource AppAccentBrush}" />
+        </Style>
+        <Style Selector="Button.nav">
+            <Setter Property="Background" Value="#091827" />
+            <Setter Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#E6F7FF" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="10,8" />
+        </Style>
+        <Style Selector="ProgressBar.metric">
+            <Setter Property="Foreground" Value="{DynamicResource AppAccentBrush}" />
+            <Setter Property="Background" Value="#0B1830" />
+            <Setter Property="Height" Value="12" />
+        </Style>
+    </Application.Styles>
+</Application>

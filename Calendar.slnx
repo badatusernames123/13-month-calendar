@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Calendar.App/Calendar.App.csproj" />
+    <Project Path="src/Calendar.Cli/Calendar.Cli.csproj" />
+    <Project Path="src/Calendar.Core/Calendar.Core.csproj" />
+  </Folder>
+</Solution>

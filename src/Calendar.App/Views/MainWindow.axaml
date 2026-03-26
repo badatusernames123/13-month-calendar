@@ -1,0 +1,326 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="Calendar.App.Views.MainWindow"
+        Width="1500"
+        Height="960"
+        MinWidth="1280"
+        MinHeight="820"
+        RequestedThemeVariant="Dark"
+        Background="{DynamicResource AppWindowBackgroundBrush}"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PostScarcity Calendar">
+
+    <Grid RowDefinitions="Auto,*" Margin="18" RowSpacing="18">
+        <Border Grid.Row="0"
+                Classes="card"
+                Background="{DynamicResource AppHeroBackgroundBrush}"
+                BorderBrush="{DynamicResource AppHeroBorderBrush}">
+            <Grid ColumnDefinitions="*,120" ColumnSpacing="20">
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      ColumnDefinitions="64,*,160"
+                      ColumnSpacing="14"
+                      RowSpacing="12"
+                      VerticalAlignment="Center">
+                    <TextBlock Text="Year"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource AppAccentBrush}" />
+                    <ProgressBar Grid.Column="1"
+                                 Classes="metric"
+                                 Value="{Binding YearProgressValue}"
+                                 Maximum="1" />
+                    <TextBlock Grid.Column="2"
+                               Text="{Binding YearProgressText}"
+                               HorizontalAlignment="Right"
+                               Foreground="White" />
+
+                    <TextBlock Grid.Row="1"
+                               Text="Month"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource AppAccentBrush}" />
+                    <ProgressBar Grid.Row="1"
+                                 Grid.Column="1"
+                                 Classes="metric"
+                                 Value="{Binding MonthProgressValue}"
+                                 Maximum="1" />
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="2"
+                               Text="{Binding MonthProgressText}"
+                               HorizontalAlignment="Right"
+                               Foreground="White" />
+
+                    <TextBlock Grid.Row="2"
+                               Text="Day"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource AppAccentBrush}" />
+                    <ProgressBar Grid.Row="2"
+                                 Grid.Column="1"
+                                 Classes="metric"
+                                 Value="{Binding DayProgressValue}"
+                                 Maximum="1" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="2"
+                               Text="{Binding DayProgressText}"
+                               HorizontalAlignment="Right"
+                               Foreground="White" />
+                </Grid>
+
+                <StackPanel Grid.Column="1"
+                            Spacing="10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center">
+                    <Button Classes="nav" Content="Next" Command="{Binding NextCommand}" HorizontalAlignment="Stretch" />
+                    <Button Classes="nav" Content="Current" Command="{Binding TodayCommand}" HorizontalAlignment="Stretch" />
+                    <Button Classes="nav" Content="Prev" Command="{Binding PreviousCommand}" HorizontalAlignment="Stretch" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1"
+              ColumnDefinitions="220,*,250"
+              ColumnSpacing="18">
+            <Border Grid.Column="0" Classes="card">
+                <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="14">
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="{Binding MonthViewTitle}"
+                                   FontSize="24"
+                                   FontWeight="Bold" />
+                        <TextBlock Text="{Binding SelectedDateLabel}"
+                                   FontSize="18"
+                                   FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding SpecialDateDescription}"
+                                   Foreground="{DynamicResource AppMutedTextBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <Separator Grid.Row="1" />
+
+                    <Grid Grid.Row="2" RowDefinitions="Auto,*" RowSpacing="10">
+                        <TextBlock Classes="section-title" Text="Categories" />
+                        <ScrollViewer Grid.Row="1"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding CategoryFilters}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#091420"
+                                                BorderBrush="{DynamicResource AppCardBorderBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="12"
+                                                Padding="10"
+                                                Margin="0,0,0,8">
+                                            <DockPanel>
+                                                <Border Width="14"
+                                                        Height="14"
+                                                        CornerRadius="7"
+                                                        Background="{Binding AccentBrush}"
+                                                        VerticalAlignment="Center"
+                                                        Margin="0,0,10,0"
+                                                        DockPanel.Dock="Left" />
+                                                <CheckBox Content="{Binding Name}"
+                                                          IsChecked="{Binding IsSelected}" />
+                                            </DockPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <StackPanel Grid.Row="3" Spacing="6">
+                        <TextBlock Text="{Binding StatusMessage}"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource AppMutedTextBrush}"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding DataFilePath}"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource AppMutedTextBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Classes="card">
+                <Grid RowDefinitions="Auto,*" RowSpacing="14">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="{Binding MonthViewTitle}"
+                                   FontSize="24"
+                                   FontWeight="Bold" />
+                        <TextBlock Text="Three event rows plus up to nine overflow dots per day."
+                                   Foreground="{DynamicResource AppMutedTextBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" RowDefinitions="Auto,*" RowSpacing="10">
+                        <Border Background="{DynamicResource AppSpecialPanelBackgroundBrush}"
+                                BorderBrush="{DynamicResource AppSpecialPanelBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="12"
+                                Padding="14"
+                                Margin="0,0,0,6"
+                                IsVisible="{Binding SelectedDateIsSpecial}">
+                            <StackPanel Spacing="6">
+                                <TextBlock Text="{Binding SelectedDateLabel}"
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="{Binding SpecialDateDescription}"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+
+                        <ItemsControl Grid.Row="1"
+                                      ItemsSource="{Binding MonthCells}"
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="4" Columns="7" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding $parent[Window].DataContext.SelectDateCommand}"
+                                            CommandParameter="{Binding Date}"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Padding="4"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch">
+                                        <Border Background="{Binding SurfaceBrush}"
+                                                BorderBrush="{Binding BorderBrush}"
+                                                BorderThickness="1.5"
+                                                CornerRadius="14"
+                                                Padding="12"
+                                                Margin="2"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch">
+                                            <Grid RowDefinitions="Auto,*,Auto" RowSpacing="6">
+                                                <TextBlock Text="{Binding Title}"
+                                                           FontSize="24"
+                                                           FontWeight="Bold"
+                                                           Foreground="{Binding ForegroundBrush}" />
+
+                                                <ItemsControl Grid.Row="1" ItemsSource="{Binding Events}">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Border Background="{Binding BackgroundBrush}"
+                                                                    BorderBrush="{Binding BorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="10"
+                                                                    Padding="5,4"
+                                                                    MinHeight="26"
+                                                                    Margin="0,0,0,4"
+                                                                    Opacity="{Binding ChromeOpacity}">
+                                                                <Grid ColumnDefinitions="12,*" ColumnSpacing="8">
+                                                                    <StackPanel Spacing="2"
+                                                                                VerticalAlignment="Center"
+                                                                                IsVisible="{Binding HasEvent}">
+                                                                        <Ellipse Width="4" Height="4" Fill="{Binding AccentBrush}" />
+                                                                        <Ellipse Width="4" Height="4" Fill="{Binding AccentBrush}" />
+                                                                        <Ellipse Width="4" Height="4" Fill="{Binding AccentBrush}" />
+                                                                    </StackPanel>
+                                                                    <StackPanel Grid.Column="1"
+                                                                                Spacing="2"
+                                                                                IsVisible="{Binding HasEvent}">
+                                                                        <TextBlock Text="{Binding Title}"
+                                                                                   FontSize="12"
+                                                                                   FontWeight="SemiBold"
+                                                                                   Foreground="{Binding ForegroundBrush}"
+                                                                                   TextTrimming="CharacterEllipsis" />
+                                                                        <TextBlock Text="{Binding Subtitle}"
+                                                                                   FontSize="11"
+                                                                                   Foreground="{Binding MutedForegroundBrush}"
+                                                                                   TextTrimming="CharacterEllipsis" />
+                                                                    </StackPanel>
+                                                                </Grid>
+                                                            </Border>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+
+                                                <ItemsControl Grid.Row="2"
+                                                              ItemsSource="{Binding OverflowDots}"
+                                                              IsVisible="{Binding HasOverflowDots}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel Orientation="Horizontal" />
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Ellipse Width="8"
+                                                                     Height="8"
+                                                                     Margin="0,0,6,6"
+                                                                     Fill="{Binding FillBrush}" />
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </Grid>
+                                        </Border>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="2" Classes="card">
+                <Grid RowDefinitions="Auto,*" RowSpacing="12">
+                    <StackPanel Spacing="8">
+                        <TextBlock Classes="section-title" Text="Selected Day" />
+                        <TextBlock Text="{Binding DayViewTitle}"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding DayViewSubtitle}"
+                                   Foreground="{DynamicResource AppMutedTextBrush}"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding SelectedDateEvents}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding $parent[Window].DataContext.SelectEventCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Padding="0">
+                                        <Border Background="{Binding SurfaceBrush}"
+                                                BorderBrush="{Binding AccentBrush}"
+                                                BorderThickness="1"
+                                                CornerRadius="12"
+                                                Padding="11"
+                                                Margin="0,0,0,8">
+                                            <Grid ColumnDefinitions="12,*" ColumnSpacing="8">
+                                                <StackPanel Spacing="2" VerticalAlignment="Top">
+                                                    <Ellipse Width="4" Height="4" Fill="{Binding AccentBrush}" />
+                                                    <Ellipse Width="4" Height="4" Fill="{Binding AccentBrush}" />
+                                                    <Ellipse Width="4" Height="4" Fill="{Binding AccentBrush}" />
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1" Spacing="4">
+                                                    <TextBlock Text="{Binding Title}"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{Binding ForegroundBrush}" />
+                                                    <TextBlock Text="{Binding CategoryName}"
+                                                               Foreground="{Binding MutedForegroundBrush}" />
+                                                    <TextBlock Text="{Binding Notes}"
+                                                               Foreground="{Binding MutedForegroundBrush}"
+                                                               TextWrapping="Wrap" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
